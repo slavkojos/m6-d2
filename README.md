@@ -1,1 +1,1 @@
-# -strive-m6-d2-node14
+m6-d2
