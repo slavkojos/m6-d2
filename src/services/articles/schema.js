@@ -40,28 +40,17 @@ const ArticleSchema = new Schema(
       type: String,
       required: true,
     },
+    reviews: [{ text: String, user: String }],
   },
   { timestamps: true }
 );
 
-const ArticleSchema1 = new Schema({
-  headline: {
-    type: String,
-    required: true,
-  },
-  subhead: {
-    type: String,
-    required: true,
-  },
-  author: {
-    name: {
-      type: String,
-      required: true,
-    },
-    img: {
-      type: String,
-      required: true,
-    },
-  },
+ArticleSchema.post("validate", function (error, doc, next) {
+  if (error) {
+    error.httpStatusCode = 400;
+    next(error);
+  } else {
+    next();
+  }
 });
 export default model("Article", ArticleSchema);
